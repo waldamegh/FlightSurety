@@ -16,10 +16,14 @@ To install, download or clone the repo, then:
 To run truffle tests:
 
 `truffle test ./test/flightSurety.js`
+
+![image](https://imgur.com/kOODzUO.png)
+
 `truffle test ./test/oracles.js`
 
 To use the dapp:
 
+`ganache-cli -m "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat" -a 50`
 `truffle migrate`
 `npm run dapp`
 
