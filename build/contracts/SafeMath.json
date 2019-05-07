@@ -1,14 +1,14 @@
 {
   "contractName": "SafeMath",
   "abi": [],
-  "bytecode": "0x604c6023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820628ac25d9a8dca7a8149a616c3d8933a3348e05ed482bc88fb97904026f3cae80029",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820628ac25d9a8dca7a8149a616c3d8933a3348e05ed482bc88fb97904026f3cae80029",
+  "bytecode": "0x604c6023600b82828239805160001a607314601657fe5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820ebaa46b2bb6caeec53c670c94ca0465bee8636031208bafae22c07b1ccc2c9890029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820ebaa46b2bb6caeec53c670c94ca0465bee8636031208bafae22c07b1ccc2c9890029",
   "sourceMap": "116:1251:3:-;;132:2:-1;166:7;155:9;146:7;137:37;255:7;249:14;246:1;241:23;235:4;232:33;222:2;;269:9;222:2;293:9;290:1;283:20;323:4;314:7;306:22;347:7;338;331:24",
   "deployedSourceMap": "116:1251:3:-;;;;;;;;",
-  "source": "pragma solidity ^0.5.0;\n\n\n/**\n * @title SafeMath\n * @dev Math operations with safety checks that throw on error\n */\nlibrary SafeMath {\n\n  /**\n  * @dev Multiplies two numbers, throws on overflow.\n  */\n  function mul(uint256 _a, uint256 _b) internal pure returns (uint256 c) {\n    // Gas optimization: this is cheaper than asserting 'a' not being zero, but the\n    // benefit is lost if 'b' is also tested.\n    // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522\n    if (_a == 0) {\n      return 0;\n    }\n\n    c = _a * _b;\n    assert(c / _a == _b);\n    return c;\n  }\n\n  /**\n  * @dev Integer division of two numbers, truncating the quotient.\n  */\n  function div(uint256 _a, uint256 _b) internal pure returns (uint256) {\n    // assert(_b > 0); // Solidity automatically throws when dividing by 0\n    // uint256 c = _a / _b;\n    // assert(_a == _b * c + _a % _b); // There is no case in which this doesn't hold\n    return _a / _b;\n  }\n\n  /**\n  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).\n  */\n  function sub(uint256 _a, uint256 _b) internal pure returns (uint256) {\n    assert(_b <= _a);\n    return _a - _b;\n  }\n\n  /**\n  * @dev Adds two numbers, throws on overflow.\n  */\n  function add(uint256 _a, uint256 _b) internal pure returns (uint256 c) {\n    c = _a + _b;\n    assert(c >= _a);\n    return c;\n  }\n}\n",
-  "sourcePath": "/home/wafa/x/FlightSurety/node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
+  "source": "pragma solidity ^0.5.0;\n\n\n/**\n * @title SafeMath\n * @dev Math operations with safety checks that throw on error\n */\nlibrary SafeMath {\n\n  /**\n  * @dev Multiplies two numbers, throws on overflow.\n  */\n  function mul(uint256 _a, uint256 _b) internal pure returns (uint256 c) {\n    // Gas optimization: this is cheaper than asserting 'a' not being zero, but the\n    // benefit is lost if 'b' is also tested.\n    // See: https://github.com/OpenZeppelin/openzeppelin-solidity/pull/522\n    if (_a == 0) {\n      return 0;\n    }\n\n    c = _a * _b;\n    assert(c / _a == _b);\n    return c;\n  }\n\n  /**\n  * @dev Integer division of two numbers, truncating the quotient.\n  */\n  function div(uint256 _a, uint256 _b) internal pure returns (uint256) {\n    // assert(_b > 0); // Solidity automatically throws when dividing by 0\n    // uint256 c = _a / _b;\n    // assert(_a == _b * c + _a % _b); // There is no case in which this doesn't hold\n    return _a / _b;\n  }\n\n  /**\n  * @dev Subtracts two numbers, throws on overflow (i.e. if subtrahend is greater than minuend).\n  */\n  function sub(uint256 _a, uint256 _b) internal pure returns (uint256) {\n    assert(_b <= _a);\n    return _a - _b;\n  }\n\n  /**\n  * @dev Adds two numbers, throws on overflow.\n  */\n  function add(uint256 _a, uint256 _b) internal pure returns (uint256 c) {\n    c = _a + _b;\n    assert(c >= _a);\n    return c;\n  }\n}",
+  "sourcePath": "/home/wafa/Desktop/FlightSurety/contracts/SafeMath.sol",
   "ast": {
-    "absolutePath": "/home/wafa/x/FlightSurety/node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
+    "absolutePath": "/home/wafa/Desktop/FlightSurety/contracts/SafeMath.sol",
     "exportedSymbols": {
       "SafeMath": [
         1919
@@ -1171,10 +1171,10 @@
         "src": "116:1251:3"
       }
     ],
-    "src": "0:1368:3"
+    "src": "0:1367:3"
   },
   "legacyAST": {
-    "absolutePath": "/home/wafa/x/FlightSurety/node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol",
+    "absolutePath": "/home/wafa/Desktop/FlightSurety/contracts/SafeMath.sol",
     "exportedSymbols": {
       "SafeMath": [
         1919
@@ -2337,7 +2337,7 @@
         "src": "116:1251:3"
       }
     ],
-    "src": "0:1368:3"
+    "src": "0:1367:3"
   },
   "compiler": {
     "name": "solc",
@@ -2345,7 +2345,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.0-beta.2",
-  "updatedAt": "2019-05-06T05:54:02.121Z",
+  "updatedAt": "2019-05-07T02:09:08.195Z",
   "devdoc": {
     "details": "Math operations with safety checks that throw on error",
     "methods": {},
