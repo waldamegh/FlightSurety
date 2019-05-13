@@ -26,7 +26,7 @@ To run truffle tests:
 
 `truffle test ./test/flightSurety.js`
 
-![image](https://imgur.com/1WraW7T.png)
+![image](https://imgur.com/xDhxuRg.png)
 
 `truffle test ./test/oracles.js`
 
