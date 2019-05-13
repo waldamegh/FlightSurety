@@ -45,7 +45,6 @@ contract FlightSuretyData {
     event PassengerInsured(address _address, bytes32 flightKey);
     event PassengerCreditUpdated(address[] _addresses, bytes32 flightKey);
     event PassengerPayout(address _address, uint256 amount);
-    event x(bytes32[] _x);
 
     /**
     * @dev Constructor
@@ -212,7 +211,7 @@ contract FlightSuretyData {
     */   
     function registerAirline(address _newAirline) external 
     requireIsOperational 
-    requireIsCallerAuthorized 
+    //requireIsCallerAuthorized 
     requireIsAirlineRegistred(tx.origin)
     requireIsAirlineFunded(tx.origin)
     returns(bool)
@@ -250,7 +249,7 @@ contract FlightSuretyData {
     */
     function fundAirline() external
         requireIsOperational
-        requireIsCallerAuthorized
+       // requireIsCallerAuthorized
         requireIsAirlineRegistred(tx.origin)
     {
         airlines[tx.origin].isFunded = true;
@@ -300,25 +299,31 @@ contract FlightSuretyData {
     * @dev Buy insurance for a flight
     *
     */   
-    function buy(bytes32 flightKey, uint256 amount) external payable requireIsOperational requireIsCallerAuthorized requirePassenger(tx.origin)
+    function buy(bytes32 flightKey, uint256 amount) external payable requireIsOperational 
+    //requireIsCallerAuthorized 
+    requirePassenger(msg.sender)
     {
-        //emit x(allFlights[tx.origin]);
-        require(allFlights[tx.origin].length >= 0 , "passenger has already an incurence for this flight");
-        boughtIncurence[flightKey].push(tx.origin);
-        insuredFlight[tx.origin][flightKey] = amount;
-        emit PassengerInsured(tx.origin, flightKey);
+        require(allFlights[msg.sender].length >= 0 , "passenger has already an incurence for this flight");
+        boughtIncurence[flightKey].push(msg.sender);
+        insuredFlight[msg.sender][flightKey] = amount;
+        emit PassengerInsured(msg.sender, flightKey);
+    }
+
+    function getAddress(bytes32 flightKey) public returns(address[] memory){
+        return boughtIncurence[flightKey];
     }
 
     /**
      *  @dev Credits payouts to insurees
     */
-    function creditInsurees(bytes32 flightKey) external payable requireIsOperational requireIsCallerAuthorized
+    function creditInsurees(bytes32 flightKey) external payable requireIsOperational 
+    //requireIsCallerAuthorized
     {
         require(boughtIncurence[flightKey].length >= 0 , "The flight does not have insurance recorded");
         for(uint i = 0; i < boughtIncurence[flightKey].length; i++) 
         {
             address _passengerAddress = boughtIncurence[flightKey][i];
-            uint256 insurenceAmount = insuredFlight[tx.origin][flightKey];
+            uint256 insurenceAmount = insuredFlight[msg.sender][flightKey];
             insuredPassengers[_passengerAddress].credit.add(insurenceAmount.div(10).mul(15));
         }
         emit PassengerCreditUpdated(boughtIncurence[flightKey], flightKey);
@@ -328,13 +333,15 @@ contract FlightSuretyData {
      *  @dev Transfers eligible payout funds to insuree
      *
     */
-    function pay() external payable requireIsOperational requireIsCallerAuthorized requirePassenger(tx.origin)
+    function pay() external payable requireIsOperational 
+    //requireIsCallerAuthorized 
+    requirePassenger(msg.sender)
     {
-        require(insuredPassengers[tx.origin].credit > 0, "There is no payout");
-        uint amount  = insuredPassengers[tx.origin].credit;
-        insuredPassengers[tx.origin].credit = 0;
-        (tx.origin).transfer(amount);
-        emit PassengerPayout(tx.origin, amount);
+        require(insuredPassengers[msg.sender].credit > 0, "There is no payout");
+        uint amount  = insuredPassengers[msg.sender].credit;
+        insuredPassengers[msg.sender].credit = 0;
+        (msg.sender).transfer(amount);
+        emit PassengerPayout(msg.sender, amount);
     } 
 
     /**

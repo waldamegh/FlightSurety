@@ -7,7 +7,8 @@ export default class Contract {
     constructor(network, callback) {
 
         let config = Config[network];
-        this.web3 = new Web3(new Web3.providers.HttpProvider(config.url));
+        this.web3 = new Web3(new Web3.providers.WebsocketProvider(config.url.replace('http', 'ws')));
+        //this.web3 = new Web3(new Web3.providers.HttpProvider(config.url));
         this.flightSuretyApp = new this.web3.eth.Contract(FlightSuretyApp.abi, config.appAddress);
         this.flightSuretyData = new this.web3.eth.Contract(FlightSuretyData.abi, config.dataAddress);
         this.appAddress = config.dataAddress;
@@ -24,7 +25,7 @@ export default class Contract {
 
             this.owner = accts[0];
             console.log("Owner Address:" + this.owner);
-
+            console.log("authorize contract Address:" + this.appAddress);
             this.flightSuretyData.methods.authorizeCaller(this.appAddress).send({ from: this.owner },
                 (error, result) => { console.log("authorizeCaller: Error=> " + error + " , Result=> " + result); });
 
@@ -66,7 +67,7 @@ export default class Contract {
     registerFlights(callback) {
         let self = this;
         for (let i = 0; i < self.flights.length; i++) {
-            self.flightSuretyApp.methods.registerFlight(self.flights[i].AirlineAddress,self.flights[i].flightNumber,1557111868).send({ from: self.airlines[0], gas:3000000 }, (error, result) => {callback(error, result); });
+            self.flightSuretyApp.methods.registerFlight(self.airlines[0],self.flights[i].flightNumber,1557093518).send({ from: self.airlines[0], gas:3000000 }, (error, result) => {callback(error, result); });
         }
     }
 

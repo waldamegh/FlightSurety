@@ -47,7 +47,7 @@ contract FlightSuretyApp {
     //events
     event airlineRegistred(address airline);
     event airlineFunded(address airline);
-    event insurancePurchased(address airline, string flightNumber, uint256 timestamp);
+    event insurancePurchased(address airline, string flightNumber, uint256 timestamp, address _address , uint256 value);
     event flightRegistered(string flightNumber);
     event PassengerPayout(address airline);
 
@@ -221,8 +221,9 @@ contract FlightSuretyApp {
         bytes32 flightKey = flightSuretyData.getFlightKey(_airline, _flightNumber, _timestamp);
         require (flights[flightKey].isRegistered, "Flight is not registered");
         require(msg.value <= insurenceFee, "Invaled incurence fee");
-        flightSuretyData.buy(flightKey, msg.value);
-        emit insurancePurchased(_airline, _flightNumber, _timestamp);
+        require(msg.value > 0, "Invaled incurence fee");
+        flightSuretyData.buy.value(msg.value)(flightKey);
+        emit insurancePurchased(_airline, _flightNumber, _timestamp, msg.sender, msg.value);
     }
 
    /**
@@ -458,7 +459,7 @@ contract FlightSuretyData {
     function isFunded(address airline) public view returns(bool);
     function registerPassenger(address _address) external;
     function isPassenger(address _address) public view returns(bool);
-    function buy(bytes32 flightKey, uint256 amount) external payable;
+    function buy(bytes32 flightKey) external payable;
     function getFlightKey(address airline, string calldata flight, uint256 timestamp) pure external returns(bytes32);
     function creditInsurees(bytes32 flightKey) external view;
     function pay() external payable;

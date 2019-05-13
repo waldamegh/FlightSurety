@@ -67,7 +67,7 @@ flightSuretyApp.events.OracleRequest({
     for (var key in oracles) {
       var indexes = oracles[key];
       if (indexes.includes(index)) {
-        let randomStatusCode = statusCode[Math.floor(Math.random() * 6)];
+        let randomStatusCode = statusCode[2]//statusCode[Math.floor(Math.random() * 6)];
         flightSuretyApp.methods.submitOracleResponse(index, airline, flight, timestamp, randomStatusCode)
           .send({ from: key, gas: 1000000 })
           .then(result => {
